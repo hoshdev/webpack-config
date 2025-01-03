@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
+import "./TaskTimer.scss";
+
 const TaskTimer = () => {
   const [tasks, setTasks] = useState([]);
   const [taskName, setTaskName] = useState("");
   const [activeTask, setActiveTask] = useState(null);
   const [timers, setTimers] = useState({});
 
-  // Añadir una nueva tarea
+  // Add a new task
   const addTask = () => {
     if (taskName.trim() === "") return;
 
@@ -15,7 +17,7 @@ const TaskTimer = () => {
     setTaskName("");
   };
 
-  // Inicia el temporizador para una tarea
+  // Start timer for a task
   const startTimer = (task) => {
     if (activeTask) return;
 
@@ -27,7 +29,7 @@ const TaskTimer = () => {
     setTimers((prev) => ({ ...prev, [`${task}-id`]: timerId }));
   };
 
-  // Detiene el temporizador para la tarea activa
+  // Stop timer for active task
   const stopTimer = () => {
     if (!activeTask) return;
 
@@ -36,23 +38,23 @@ const TaskTimer = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="container">
       <h1>Task Timer</h1>
-      <div style={styles.addTask}>
+      <div className="addTask">
         <input
           type="text"
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
           placeholder="Enter task name"
-          style={styles.input}
+          className="input"
         />
-        <button onClick={addTask} style={styles.button}>
+        <button onClick={addTask} className="button">
           Add Task
         </button>
       </div>
-      <ul style={styles.taskList}>
+      <ul className="taskList">
         {tasks.map((task, index) => (
-          <li key={index} style={styles.taskItem}>
+          <li key={index} className="taskItem">
             <span>{task}</span>
             <span>{timers[task]}s</span>
             <button
@@ -68,7 +70,8 @@ const TaskTimer = () => {
       {activeTask && (
         <button
           onClick={stopTimer}
-          style={{ ...styles.button, marginTop: "20px" }}
+          className="button"
+          style={{ marginTop: "20px" }}
         >
           Stop Timer
         </button>

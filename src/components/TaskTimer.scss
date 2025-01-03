@@ -1,0 +1,61 @@
+$primary-color: #42a5f5;
+$secondary-color: #ff9800;
+$border-color: #ddd;
+$font-family: Arial, sans-serif;
+
+.container {
+  text-align: center;
+  padding: 20px;
+  font-family: $font-family;
+}
+
+.addTask {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.buttonStop {
+  @extend .addTask;
+  margin-top: 20px;
+}
+
+.taskList {
+  list-style: none;
+  padding: 12px;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid $border-color;
+}
+
+.timerButton {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: $secondary-color;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}

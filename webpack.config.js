@@ -17,8 +17,12 @@ module.exports = {
         use: "babel-loader", // Usa babel-loader para transpilar JS
       },
       {
-        test: /\.css$/, // Procesa archivos CSS
-        use: ["style-loader", "css-loader"], // Aplica style-loader y css-loader
+        test: /\.(s[ac]ss|css)$/i, // Soporte para archivos .scss, .sass y .css
+        use: [
+          "style-loader", // Inyecta CSS en el DOM
+          "css-loader", // Traduce CSS a módulos CommonJS
+          "sass-loader", // Compila Sass/SCSS a CSS
+        ],
       },
     ],
   },
