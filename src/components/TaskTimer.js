@@ -42,6 +42,7 @@ const TaskTimer = () => {
   return (
     <div className={styles.container}>
       <Title title={"Task Timer"} />
+
       <div className={styles.addTask}>
         <input
           type="text"

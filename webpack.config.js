@@ -17,6 +17,11 @@ module.exports = {
         use: "babel-loader", // Usa babel-loader para transpilar JS
       },
       {
+        test: /\.tsx?$/, // Procesa archivos .ts y .tsx
+        use: "ts-loader", // Usa ts-loader para transpilar TypeScript
+        exclude: /node_modules/,
+      },
+      {
         test: /\.module\.css$/i, // Procesa archivos .module.css (modulos CSS)
         use: [
           "sass-loader", // Compila Sass/SCSS a CSS
@@ -33,7 +38,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.module\.(s[ac]ss)$/i, // Procesa archivos .module.scss (modulos SCSS)
+        test: /\.module\.(s[ac]ss)$/i, // Proc  esa archivos .module.scss (modulos SCSS)
         use: [
           "style-loader", // Inyecta CSS en el DOM
           {
@@ -76,6 +81,6 @@ module.exports = {
     historyApiFallback: true, // Soporte para rutas en React
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"], // Resolución de extensiones
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"],
   },
 };

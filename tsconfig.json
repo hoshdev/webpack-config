@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Establece la versión de JavaScript de salida
+    "lib": ["dom", "esnext"], // Permite usar las características más recientes de JS y DOM
+    "allowJs": true, // Permite compilar archivos .js junto con .ts
+    "jsx": "react-jsx", // Usar JSX con React (si usas React 17 o superior)
+    "moduleResolution": "node", // Resolver módulos de acuerdo a cómo lo hace Node.js
+    "esModuleInterop": true, // Permite la interoperabilidad entre módulos CommonJS y ES
+    "strict": true, // Habilita todas las verificaciones estrictas de TypeScript
+    "skipLibCheck": true, // Omite la comprobación de tipos de los archivos de declaración
+    "forceConsistentCasingInFileNames": true, // Mantiene la coherencia en el uso de mayúsculas/minúsculas en los nombres de archivos
+    "outDir": "./dist", // Directorio de salida para los archivos compilados
+    "baseUrl": "./", // Base URL para las rutas relativas
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": [
+    "src/**/*" // Incluir todos los archivos TS y TSX en la carpeta src
+  ],
+  "exclude": [
+    "node_modules" // Excluir la carpeta node_modules
+  ]
+}
