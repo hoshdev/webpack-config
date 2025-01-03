@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import styles from "./TaskTimer.module.scss";
+import TaskList from "./TaskList";
+import Title from "./Title";
 
 const TaskTimer = () => {
   const [tasks, setTasks] = useState([]);
@@ -39,7 +41,7 @@ const TaskTimer = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Task Timer</h1>
+      <Title title={"Task Timer"} />
       <div className={styles.addTask}>
         <input
           type="text"
@@ -52,21 +54,13 @@ const TaskTimer = () => {
           Add Task
         </button>
       </div>
-      <ul className={styles.taskList}>
-        {tasks.map((task, index) => (
-          <li key={index} className={styles.taskItem}>
-            <span>{task}</span>
-            <span>{timers[task]}s</span>
-            <button
-              onClick={() => startTimer(task)}
-              disabled={activeTask && activeTask !== task}
-              className={styles.timerButton}
-            >
-              {activeTask === task ? "Running..." : "Start"}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <TaskList
+        tasks={tasks}
+        onClick={(task) => startTimer(task)}
+        timers={timers}
+        activeTask={activeTask}
+      />
+
       {activeTask && (
         <button onClick={stopTimer} className={styles.buttonStop}>
           Stop Timer
