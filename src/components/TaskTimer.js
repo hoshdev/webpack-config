@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./TaskTimer.module.scss";
 import TaskList from "./TaskList";
 import Title from "./Title";
+import TaskHeader from "./TaskHeader";
 
 const TaskTimer = () => {
   const [tasks, setTasks] = useState([]);
@@ -42,19 +43,12 @@ const TaskTimer = () => {
   return (
     <div className={styles.container}>
       <Title title={"Task Timer"} />
+      <TaskHeader
+        taskName={taskName}
+        onChange={(value) => setTaskName(value)}
+        onClickAdd={addTask}
+      />
 
-      <div className={styles.addTask}>
-        <input
-          type="text"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          placeholder="Enter task name"
-          className={styles.input}
-        />
-        <button onClick={addTask} className={styles.button}>
-          Add Task
-        </button>
-      </div>
       <TaskList
         tasks={tasks}
         onClick={(task) => startTimer(task)}
