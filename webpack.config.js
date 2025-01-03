@@ -38,6 +38,6 @@ module.exports = {
     historyApiFallback: true, // Soporte para rutas en React
   },
   resolve: {
-    extensions: [".js", ".jsx"], // Archivos que Webpack debe resolver
+    extensions: [".js", ".jsx", ".scss"], // Resolución de extensiones
   },
 };
