@@ -17,7 +17,45 @@ module.exports = {
         use: "babel-loader", // Usa babel-loader para transpilar JS
       },
       {
-        test: /\.(s[ac]ss|css)$/i, // Soporte para archivos .scss, .sass y .css
+        test: /\.module\.css$/i, // Procesa archivos .module.css (modulos CSS)
+        use: [
+          "sass-loader", // Compila Sass/SCSS a CSS
+          "style-loader", // Inyecta CSS en el DOM
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]__[hash:base64:5]",
+              },
+              esModule: false,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.module\.(s[ac]ss)$/i, // Procesa archivos .module.scss (modulos SCSS)
+        use: [
+          "style-loader", // Inyecta CSS en el DOM
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]__[hash:base64:5]",
+              },
+              esModule: false,
+            },
+          },
+          "sass-loader", // Compila Sass/SCSS a CSS
+        ],
+      },
+      {
+        test: /\.(css)$/i, // Procesa archivos .css normales
+        exclude: /\.module\.css$/i, // Excluye los archivos .module.css
+        use: ["style-loader", "css-loader"], // Procesa CSS normal sin módulos
+      },
+      {
+        test: /\.(s[ac]ss)$/i, // Procesa archivos .scss y .sass normales
+        exclude: /\.module\.(s[ac]ss)$/i, // Excluye los archivos .module.scss
         use: [
           "style-loader", // Inyecta CSS en el DOM
           "css-loader", // Traduce CSS a módulos CommonJS

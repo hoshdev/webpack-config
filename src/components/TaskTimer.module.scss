@@ -33,7 +33,7 @@ $font-family: Arial, sans-serif;
 }
 
 .buttonStop {
-  @extend .addTask;
+  @extend .button;
   margin-top: 20px;
 }
 
