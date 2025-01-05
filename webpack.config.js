@@ -1,14 +1,18 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js", // Punto de entrada de la aplicación
   output: {
-    path: path.resolve(__dirname, "dist"), // Carpeta de salida
-    filename: "bundle.js", // Nombre del archivo de salida
-    clean: true, // Limpia la carpeta de salida antes de compilar
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js", // Agregar hash basado en el contenido
+    clean: true,
   },
-  mode: "development", // Modo de desarrollo
+  mode: "production", // Modo de desarrollo
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -40,7 +44,7 @@ module.exports = {
       {
         test: /\.module\.(s[ac]ss)$/i, // Proc  esa archivos .module.scss (modulos SCSS)
         use: [
-          "style-loader", // Inyecta CSS en el DOM
+          MiniCssExtractPlugin.loader, // Inyecta CSS en el DOM
           {
             loader: "css-loader",
             options: {
@@ -56,13 +60,13 @@ module.exports = {
       {
         test: /\.(css)$/i, // Procesa archivos .css normales
         exclude: /\.module\.css$/i, // Excluye los archivos .module.css
-        use: ["style-loader", "css-loader"], // Procesa CSS normal sin módulos
+        use: [MiniCssExtractPlugin.loader, "css-loader"], // Procesa CSS normal sin módulos
       },
       {
         test: /\.(s[ac]ss)$/i, // Procesa archivos .scss y .sass normales
         exclude: /\.module\.(s[ac]ss)$/i, // Excluye los archivos .module.scss
         use: [
-          "style-loader", // Inyecta CSS en el DOM
+          MiniCssExtractPlugin.loader, // Inyecta CSS en el DOM
           "css-loader", // Traduce CSS a módulos CommonJS
           "sass-loader", // Compila Sass/SCSS a CSS
         ],
@@ -73,6 +77,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html", // Plantilla HTML
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
+    new CompressionPlugin({
+      algorithm: "gzip",
+      test: /\.(js|css|html|svg)$/, // Comprime JS, CSS, HTML y SVG
+      threshold: 8192, // Tamaño mínimo en bytes para comprimir
+      minRatio: 0.8, // Relación mínima de compresión
+    }),
   ],
   devServer: {
     static: path.join(__dirname, "public"), // Carpeta pública
@@ -82,5 +95,24 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true, // Elimina console.log
+          },
+          format: {
+            comments: false, // Elimina comentarios
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+    splitChunks: {
+      chunks: "all", // Divide todo el código compartido
+    },
   },
 };
