@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   entry: "./src/index.js", // Punto de entrada de la aplicación
@@ -85,6 +86,10 @@ module.exports = {
       test: /\.(js|css|html|svg)$/, // Comprime JS, CSS, HTML y SVG
       threshold: 8192, // Tamaño mínimo en bytes para comprimir
       minRatio: 0.8, // Relación mínima de compresión
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static", // Genera un archivo HTML con el análisis
+      openAnalyzer: false, // No abre automáticamente el análisis
     }),
   ],
   devServer: {
