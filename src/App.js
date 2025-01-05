@@ -1,12 +1,5 @@
-import React from "react";
-import TaskTimer from "./components/TaskTimer";
-
 const App = () => {
-  return (
-    <div>
-      <TaskTimer />
-    </div>
-  );
+  return <div>Web pack Config</div>;
 };
 
 export default App;
