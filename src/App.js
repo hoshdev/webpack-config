@@ -1,5 +1,7 @@
+import styles from "./App.module.scss";
+
 const App = () => {
-  return <div>Web pack Config</div>;
+  return <div className={styles.container}>Web pack Config</div>;
 };
 
 export default App;
