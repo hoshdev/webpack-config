@@ -14,6 +14,7 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, "dist"), // Output directory
       filename: isProduction ? "[name].[contenthash].js" : "[name].js", // Output filename with content hash in production
       clean: true, // Clean the output directory before building
+      publicPath: "/", // When reloading, consider path from client.
     },
     mode: isProduction ? "production" : "development", // Set mode based on environment
     devtool: isProduction ? "source-map" : "eval-cheap-module-source-map", // Generate source maps for debugging
