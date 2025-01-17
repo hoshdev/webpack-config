@@ -112,6 +112,9 @@ module.exports = (env, argv) => {
         }
       : undefined, // Only configure devServer in development mode
     resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"), // Alias para la carpeta src
+      },
       extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".css"], // Automatically resolve these extensions
     },
     optimization: isProduction
